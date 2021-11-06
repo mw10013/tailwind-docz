@@ -6,7 +6,19 @@ const Wrapper = ({ children, doc }) => {
     <>
       <Helmet>
         <link
-          href="https://unpkg.com/tailwindcss@2/dist/tailwind.min.css"
+          href="https://unpkg.com/tailwindcss/dist/preflight.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://unpkg.com/tailwindcss/dist/components.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://unpkg.com/tailwindcss/dist/utilities.min.css"
           rel="stylesheet"
         />
       </Helmet>
