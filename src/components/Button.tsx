@@ -27,13 +27,11 @@ const styles = {
   disabled: "opacity-50 cursor-not-allowed",
 };
 
-type ButtonProps = {
-  type: "primary" | "secondary" | "white";
+export type ButtonProps = {
+  variant: "primary" | "secondary" | "white";
   size: "small" | "medium" | "large";
   shape: "rectangular" | "round";
-  disabled: boolean;
-  children?: React.ReactNode;
-};
+} & React.ComponentPropsWithoutRef<"button">;
 
 // primary className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 // primary className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -49,22 +47,24 @@ type ButtonProps = {
 // disabled class="bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
 
 export const Button = ({
-  type = "primary",
+  variant = "primary",
   size = "medium",
   shape = "rectangular",
   disabled = false,
   children,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
       className={classNames(
-        styles[type],
+        styles[variant],
         styles[size],
         styles.shape[shape][size],
         disabled ? styles.disabled : "",
         "inline-flex items-center border font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       )}
       disabled={disabled}
+      {...rest}
     >
       {children}
     </button>
