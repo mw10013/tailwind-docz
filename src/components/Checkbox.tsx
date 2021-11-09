@@ -4,17 +4,28 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export type CheckboxProps = Omit<
-  React.ComponentPropsWithoutRef<"input">,
-  "children"
->;
+export type CheckboxProps = {
+  indeterminate?: boolean;
+} & Omit<React.ComponentPropsWithoutRef<"input">, "children">;
 
-export const Checkbox = ({ ...props }: CheckboxProps) => {
+export const Checkbox = ({
+  indeterminate = false,
+  ...props
+}: CheckboxProps) => {
+  const ref = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (ref && ref.current && indeterminate !== undefined) {
+      ref.current.indeterminate = indeterminate;
+    }
+  }, [ref, indeterminate]);
+
   return (
     <div className="flex items-center h-5">
       <input
         type="checkbox"
         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+        ref={ref}
         {...props}
       />
     </div>
