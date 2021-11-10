@@ -5,10 +5,14 @@ function classNames(...classes: string[]) {
 }
 
 export type CheckboxProps = {
+  id: string;
+  label: string;
   indeterminate?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<"input">, "children">;
 
 export const Checkbox = ({
+  id,
+  label,
   indeterminate = false,
   ...props
 }: CheckboxProps) => {
@@ -21,13 +25,21 @@ export const Checkbox = ({
   }, [ref, indeterminate]);
 
   return (
-    <div className="flex items-center h-5">
-      <input
-        type="checkbox"
-        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-        ref={ref}
-        {...props}
-      />
+    <div className="relative flex items-start">
+      <div className="flex items-center h-5">
+        <input
+          id={id}
+          type="checkbox"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          ref={ref}
+          {...props}
+        />
+      </div>
+      <div className="ml-3 text-sm">
+        <label htmlFor={id} className="font-medium text-gray-700">
+          {label}
+        </label>
+      </div>
     </div>
   );
 };
