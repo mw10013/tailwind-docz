@@ -1,9 +1,5 @@
 import React from "react";
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export type CheckboxProps = {
   id: string;
   label: string;
