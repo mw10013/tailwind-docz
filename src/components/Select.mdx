@@ -3,18 +3,33 @@ name: Select
 ---
 
 import { Playground } from "docz";
-import { Select, TWSelect, TWSelectSandbox } from "./Select";
+import {
+  SelectNative,
+  TWSelect,
+  TWSelectSandbox,
+  TWSelectCustom,
+} from "./Select";
 
 # Select
+
+## TWSelectCustom
+
+<Playground>
+  <div className="w-full max-w-xs mx-auto">
+    <TWSelectCustom />
+  </div>
+</Playground>
+
+## SelectNative
 
 <Playground>
   <div className="flex flex-col gap-1">
     <div className="w-full max-w-xs mx-auto">
-      <Select id="location" name="location" defaultValue="Canada">
+      <SelectNative id="location" name="location" defaultValue="Canada">
         <option>United States</option>
         <option>Canada</option>
         <option>Mexico</option>
-      </Select>
+      </SelectNative>
     </div>
   </div>
 </Playground>
