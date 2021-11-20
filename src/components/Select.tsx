@@ -4,16 +4,16 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-  { id: 7, name: "Caroline Schultz" },
-  { id: 8, name: "Mason Heaney" },
-  { id: 9, name: "Claudie Smitham" },
-  { id: 10, name: "Emil Schaefer" },
+  { id: 1, name: "Wade Cooper", unavailable: false },
+  { id: 2, name: "Arlene Mccoy", unavailable: false },
+  { id: 3, name: "Devon Webb", unavailable: false },
+  { id: 4, name: "Tom Cook", unavailable: false },
+  { id: 5, name: "Tanya Fox", unavailable: false },
+  { id: 6, name: "Hellen Schmidt", unavailable: false },
+  { id: 7, name: "Caroline Schultz", unavailable: false },
+  { id: 8, name: "Mason Heaney", unavailable: false },
+  { id: 9, name: "Claudie Smitham", unavailable: true },
+  { id: 10, name: "Emil Schaefer", unavailable: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -157,6 +157,55 @@ export const TWSelectCustom = () => {
           </div>
         </>
       )}
+    </Listbox>
+  );
+};
+
+export const ListboxBare = () => {
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
+
+  return (
+    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+      <Listbox.Button>{selectedPerson.name}</Listbox.Button>
+      <Listbox.Options>
+        {people.map((person) => (
+          <Listbox.Option
+            key={person.id}
+            value={person}
+            disabled={person.unavailable}
+          >
+            {person.name}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
+    </Listbox>
+  );
+};
+
+export const ListboxActiveSelected = () => {
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
+
+  return (
+    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+      <Listbox.Button>{selectedPerson.name}</Listbox.Button>
+      <Listbox.Options>
+        {people.map((person) => (
+          /* Use the `active` state to conditionally style the active option. */
+          /* Use the `selected` state to conditionally style the selected option. */
+          <Listbox.Option key={person.id} value={person} as={Fragment}>
+            {({ active, selected }) => (
+              <li
+                className={`${
+                  active ? "bg-blue-500 text-white" : "bg-white text-black"
+                }`}
+              >
+                {selected && <CheckIcon />}
+                {person.name}
+              </li>
+            )}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
     </Listbox>
   );
 };
