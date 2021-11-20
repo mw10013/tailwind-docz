@@ -209,3 +209,21 @@ export const ListboxActiveSelected = () => {
     </Listbox>
   );
 };
+
+export const ListboxCustomLabel = () => {
+  const [selectedPerson, setSelectedPerson] = useState(people[0])
+
+  return (
+    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+      <Listbox.Label>Assignee:</Listbox.Label>
+      <Listbox.Button>{selectedPerson.name}</Listbox.Button>
+      <Listbox.Options>
+        {people.map((person) => (
+          <Listbox.Option key={person.id} value={person}>
+            {person.name}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
+    </Listbox>
+  )
+}
